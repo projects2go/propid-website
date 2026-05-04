@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PropID — Your Home. Verified.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --blue:#1666f8;
+  --blue-light:#4d8fff;
+  --blue-dim:rgba(22,102,248,0.12);
+  --bg:#06060f;
+  --bg2:#0c0c1a;
+  --bg3:#111124;
+  --surface:rgba(255,255,255,0.04);
+  --border:rgba(255,255,255,0.07);
+  --border-blue:rgba(22,102,248,0.35);
+  --text:#ffffff;
+  --text2:rgba(255,255,255,0.55);
+  --text3:rgba(255,255,255,0.3);
+  --mono:'DM Mono',monospace;
+  --sans:'DM Sans',sans-serif;
+  --display:'Sora',sans-serif;
+  --radius:16px;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden;line-height:1.6;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid transparent;transition:all 0.3s;}
+nav.scrolled{background:rgba(6,6,15,0.92);border-bottom-color:var(--border);backdrop-filter:blur(20px);}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-icon{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#1666f8,#0047d1);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.nav-wordmark{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:-0.04em;line-height:1;}
+.nav-wordmark .prop{color:#fff;}
+.nav-wordmark .id{color:var(--blue-light);}
+.nav-links{display:flex;align-items:center;gap:32px;}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:14px;font-weight:400;transition:color 0.2s;}
+.nav-links a:hover{color:var(--text);}
+.nav-cta{background:var(--blue);color:#fff;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;transition:opacity 0.2s;}
+.nav-cta:hover{opacity:0.85;}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;position:relative;overflow:hidden;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 60% at 50% 50%,black,transparent);}
+.hero-glow{position:absolute;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(22,102,248,0.15) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;background:var(--blue-dim);border:1px solid var(--border-blue);border-radius:100px;padding:6px 16px;font-family:var(--mono);font-size:11px;letter-spacing:0.12em;color:var(--blue-light);text-transform:uppercase;margin-bottom:32px;}
+.hero-pill-dot{width:6px;height:6px;border-radius:50%;background:var(--blue-light);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(42px,7vw,88px);letter-spacing:-0.04em;line-height:1.0;max-width:900px;margin-bottom:28px;}
+h1 .blue{color:var(--blue-light);}
+.hero-sub{font-size:clamp(16px,2vw,20px);color:var(--text2);max-width:600px;margin:0 auto 48px;line-height:1.7;font-weight:300;}
+.hero-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center;}
+.btn-primary{background:var(--blue);color:#fff;padding:16px 36px;border-radius:10px;font-size:16px;font-weight:500;text-decoration:none;transition:all 0.2s;border:1px solid transparent;}
+.btn-primary:hover{background:#1259e0;transform:translateY(-1px);}
+.btn-secondary{color:var(--text2);padding:16px 36px;border-radius:10px;font-size:16px;font-weight:400;text-decoration:none;border:1px solid var(--border);transition:all 0.2s;}
+.btn-secondary:hover{color:var(--text);border-color:rgba(255,255,255,0.2);}
+.hero-stats{display:flex;align-items:center;gap:48px;margin-top:72px;padding-top:48px;border-top:1px solid var(--border);flex-wrap:wrap;justify-content:center;}
+.hero-stat{text-align:center;}
+.hero-stat-num{font-family:var(--display);font-size:36px;font-weight:700;color:#fff;letter-spacing:-0.03em;}
+.hero-stat-label{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);margin-top:4px;}
+
+/* TRUST STRIP */
+.trust{padding:48px 40px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.trust-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:24px;flex-wrap:wrap;justify-content:center;}
+.trust-label{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);margin-right:16px;white-space:nowrap;}
+.trust-badge{display:flex;align-items:center;gap:10px;padding:10px 20px;border:1px solid var(--border);border-radius:100px;font-size:13px;color:var(--text2);}
+.trust-badge svg{opacity:0.5;}
+
+/* SECTION */
+section{max-width:1100px;margin:0 auto;padding:100px 40px;}
+.section-tag{font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--blue-light);margin-bottom:16px;}
+h2{font-family:var(--display);font-size:clamp(32px,4vw,52px);font-weight:700;letter-spacing:-0.03em;line-height:1.1;margin-bottom:20px;}
+h2 .dim{color:var(--text2);}
+.section-sub{font-size:18px;color:var(--text2);max-width:560px;font-weight:300;line-height:1.7;}
+
+/* HOW IT WORKS */
+.steps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;margin-top:64px;}
+.step{background:var(--bg2);padding:48px 40px;position:relative;overflow:hidden;}
+.step:first-child{border-radius:var(--radius) 0 0 var(--radius);}
+.step:last-child{border-radius:0 var(--radius) var(--radius) 0;}
+.step::before{content:'';position:absolute;inset:0;border:1px solid var(--border);}
+.step-num{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;color:var(--text3);margin-bottom:32px;}
+.step-icon{width:56px;height:56px;border-radius:14px;background:var(--blue-dim);border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;margin-bottom:24px;}
+.step-icon svg{color:var(--blue-light);}
+.step h3{font-family:var(--display);font-size:20px;font-weight:700;letter-spacing:-0.02em;margin-bottom:12px;}
+.step p{font-size:14px;color:var(--text2);line-height:1.7;}
+.step-connector{position:absolute;right:-1px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:2;}
+
+/* PHONE DEMO */
+.demo-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.demo-inner{max-width:1100px;margin:0 auto;padding:100px 40px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.demo-phone{position:relative;display:flex;justify-content:center;}
+.phone-frame{width:260px;height:520px;border-radius:40px;border:2px solid rgba(255,255,255,0.1);background:var(--bg3);overflow:hidden;position:relative;box-shadow:0 40px 80px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.05);}
+.phone-notch{width:100px;height:28px;background:var(--bg3);border-radius:0 0 20px 20px;position:absolute;top:0;left:50%;transform:translateX(-50%);z-index:10;border:2px solid rgba(255,255,255,0.08);border-top:none;}
+.phone-screen{padding:40px 20px 20px;height:100%;display:flex;flex-direction:column;gap:12px;}
+.phone-header{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+.phone-header-icon{width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,#1666f8,#0047d1);display:flex;align-items:center;justify-content:center;}
+.phone-title{font-family:var(--display);font-size:13px;font-weight:700;letter-spacing:-0.02em;}
+.phone-title .id{color:var(--blue-light);}
+.gps-card{background:rgba(22,102,248,0.1);border:1px solid var(--border-blue);border-radius:12px;padding:14px;display:flex;align-items:center;gap:10px;}
+.gps-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;flex-shrink:0;box-shadow:0 0 8px rgba(34,197,94,0.6);animation:pulse 1.5s infinite;}
+.gps-text{font-size:10px;color:var(--text2);}
+.gps-text strong{display:block;font-size:11px;color:#fff;font-weight:500;}
+.photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.photo-slot{border-radius:8px;aspect-ratio:1;overflow:hidden;position:relative;}
+.photo-slot-done{background:linear-gradient(135deg,#1a2a4a,#0f1a2e);}
+.photo-slot-done::after{content:'✓';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--blue-light);font-size:18px;}
+.photo-slot-active{background:var(--blue-dim);border:1.5px dashed var(--blue);animation:photopulse 2s infinite;}
+@keyframes photopulse{0%,100%{border-color:var(--blue);}50%{border-color:var(--blue-light);}}
+.photo-slot-empty{background:var(--surface);border:1px dashed var(--border);}
+.phone-label{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);}
+.room-label{font-size:10px;color:var(--text2);margin-top:2px;}
+.verify-bar{margin-top:auto;background:var(--blue);border-radius:10px;padding:12px;text-align:center;font-family:var(--display);font-size:12px;font-weight:700;letter-spacing:-0.01em;}
+.phone-glow{position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(22,102,248,0.2),transparent 70%);pointer-events:none;}
+.demo-content .section-tag{margin-bottom:24px;}
+.demo-steps{margin-top:40px;display:flex;flex-direction:column;gap:0;}
+.demo-step{display:flex;gap:20px;padding:24px 0;border-bottom:1px solid var(--border);}
+.demo-step:last-child{border-bottom:none;}
+.demo-step-num{width:32px;height:32px;border-radius:50%;background:var(--blue-dim);border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--blue-light);flex-shrink:0;margin-top:2px;}
+.demo-step-body h4{font-family:var(--display);font-size:15px;font-weight:600;margin-bottom:4px;}
+.demo-step-body p{font-size:13px;color:var(--text2);line-height:1.6;}
+
+/* FOR SECTION */
+.for-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:64px;}
+.for-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:40px;transition:border-color 0.3s;}
+.for-card:hover{border-color:var(--border-blue);}
+.for-icon{width:48px;height:48px;border-radius:12px;margin-bottom:24px;display:flex;align-items:center;justify-content:center;}
+.for-icon.blue{background:var(--blue-dim);border:1px solid var(--border-blue);}
+.for-icon.green{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);}
+.for-icon.amber{background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.2);}
+.for-icon.purple{background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);}
+.for-card h3{font-family:var(--display);font-size:22px;font-weight:700;letter-spacing:-0.02em;margin-bottom:12px;}
+.for-card p{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:24px;}
+.for-list{display:flex;flex-direction:column;gap:8px;}
+.for-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--text2);}
+.for-item::before{content:'';width:16px;height:16px;border-radius:50%;background:var(--blue-dim);border:1px solid var(--border-blue);flex-shrink:0;margin-top:2px;}
+
+/* REPORT SECTION */
+.report-section{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 50%,var(--bg) 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.report-inner{max-width:1100px;margin:0 auto;padding:100px 40px;}
+.report-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:64px;}
+.report-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;transition:all 0.3s;}
+.report-item:hover{border-color:var(--border-blue);background:var(--blue-dim);}
+.report-item-icon{font-size:24px;margin-bottom:12px;}
+.report-item h4{font-family:var(--display);font-size:15px;font-weight:600;margin-bottom:6px;}
+.report-item p{font-size:12px;color:var(--text2);line-height:1.6;}
+
+/* INVITE / CTA */
+.cta-section{text-align:center;padding:120px 40px;position:relative;overflow:hidden;}
+.cta-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(22,102,248,0.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+.cta-section h2{max-width:700px;margin:24px auto 16px;}
+.cta-section .section-sub{margin:0 auto 48px;}
+.invite-form{display:flex;gap:12px;max-width:520px;margin:0 auto;flex-wrap:wrap;justify-content:center;}
+.invite-input{flex:1;min-width:200px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px 20px;color:#fff;font-size:15px;font-family:var(--sans);outline:none;transition:border-color 0.2s;}
+.invite-input::placeholder{color:var(--text3);}
+.invite-input:focus{border-color:var(--blue-light);}
+.invite-btn{background:var(--blue);color:#fff;padding:16px 28px;border-radius:10px;font-size:15px;font-weight:500;border:none;cursor:pointer;font-family:var(--sans);transition:all 0.2s;white-space:nowrap;}
+.invite-btn:hover{background:#1259e0;}
+.invite-btn:disabled{opacity:0.5;cursor:not-allowed;}
+.form-msg{margin-top:16px;font-size:14px;font-family:var(--mono);letter-spacing:0.06em;}
+.form-msg.success{color:#22c55e;}
+.form-msg.error{color:#f87171;}
+.cta-note{font-size:12px;color:var(--text3);margin-top:16px;font-family:var(--mono);letter-spacing:0.08em;}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:48px 40px;}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;}
+.footer-left{display:flex;align-items:center;gap:16px;}
+.footer-copy{font-size:13px;color:var(--text3);}
+.footer-links{display:flex;gap:24px;}
+.footer-links a{font-size:13px;color:var(--text3);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--text2);}
+.footer-badge{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text3);border:1px solid var(--border);border-radius:4px;padding:3px 8px;}
+
+/* ANIMATIONS */
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+.delay-1{transition-delay:0.1s;}
+.delay-2{transition-delay:0.2s;}
+.delay-3{transition-delay:0.3s;}
+.delay-4{transition-delay:0.4s;}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:16px 20px;}
+  .nav-links{display:none;}
+  section{padding:60px 20px;}
+  .steps{grid-template-columns:1fr;}
+  .step:first-child{border-radius:var(--radius) var(--radius) 0 0;}
+  .step:last-child{border-radius:0 0 var(--radius) var(--radius);}
+  .step-connector{display:none;}
+  .demo-inner{grid-template-columns:1fr;gap:40px;}
+  .for-grid{grid-template-columns:1fr;}
+  .report-grid{grid-template-columns:1fr 1fr;}
+  .footer-inner{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <path d="M12 3L2 9.5V21H9V15H15V21H22V9.5L12 3Z" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" stroke-linejoin="round"/>
+        <circle cx="18" cy="7" r="4" fill="rgba(0,20,90,0.7)"/>
+        <circle cx="18" cy="7" r="1.6" fill="#ffffff"/>
+        <path d="M18 11L18 15" stroke="rgba(255,255,255,0.5)" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="nav-wordmark"><span class="prop">Prop</span><span class="id">ID</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="#how-it-works">How it works</a>
+    <a href="#the-report">The report</a>
+    <a href="#industry">For industry</a>
+    <a href="#request">Request access</a>
+  </div>
+  <a href="#request" class="nav-cta">Request Invite</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-pill">
+    <span class="hero-pill-dot"></span>
+    Now accepting early access
+  </div>
+  <h1>The verified property<br>report that <span class="blue">everyone</span><br>can trust</h1>
+  <p class="hero-sub">GPS-stamped photos. AI-powered comparable analysis. A single verified document for homeowners, brokers, lenders, and insurers.</p>
+  <div class="hero-actions">
+    <a href="#request" class="btn-primary">Request Early Access</a>
+    <a href="#how-it-works" class="btn-secondary">See how it works →</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">GPS</div>
+      <div class="hero-stat-label">Location Verified</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">AI</div>
+      <div class="hero-stat-label">Comparable Analysis</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">PDF</div>
+      <div class="hero-stat-label">Signed Report</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">ON</div>
+      <div class="hero-stat-label">Ontario Focused</div>
+    </div>
+  </div>
+</div>
+
+<!-- TRUST STRIP -->
+<div class="trust">
+  <div class="trust-inner">
+    <span class="trust-label">Built for</span>
+    <div class="trust-badge">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/></svg>
+      Homeowners
+    </div>
+    <div class="trust-badge">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      Real Estate Brokers
+    </div>
+    <div class="trust-badge">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+      Mortgage Lenders
+    </div>
+    <div class="trust-badge">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Insurance Providers
+    </div>
+    <div class="trust-badge">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Property Appraisers
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="section-tag fade-in">How it works</div>
+  <h2 class="fade-in delay-1">Three steps to a <span class="dim">verified report</span></h2>
+  <p class="section-sub fade-in delay-2">From invite to verified PDF in under an hour. No technical knowledge required — just a smartphone.</p>
+  <div class="steps fade-in delay-3">
+    <div class="step">
+      <div class="step-num">01 —</div>
+      <div class="step-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" color="#4d8fff"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM17 17m-3 0a3 3 0 106 0 3 3 0 00-6 0"/></svg>
+      </div>
+      <h3>Receive your invite</h3>
+      <p>Your broker sends a personalized, time-limited invite link directly to you. No account creation, no app store — just a secure link on your phone.</p>
+      <div class="step-connector">→</div>
+    </div>
+    <div class="step">
+      <div class="step-num">02 —</div>
+      <div class="step-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" color="#4d8fff"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 00-8 8c0 5.333 8 14 8 14s8-8.667 8-14a8 8 0 00-8-8z"/></svg>
+      </div>
+      <h3>GPS-stamp your property</h3>
+      <p>PropID acquires your location at the property. Every photo you take is automatically stamped with verified GPS coordinates, proving presence on-site.</p>
+      <div class="step-connector">→</div>
+    </div>
+    <div class="step">
+      <div class="step-num">03 —</div>
+      <div class="step-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" color="#4d8fff"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+      </div>
+      <h3>Receive your verified report</h3>
+      <p>Our AI analyzes real comparable sales. A certified PDF report is generated with photos, GPS data, property details, and market analysis — ready to share.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PHONE DEMO -->
+<div class="demo-section">
+  <div class="demo-inner">
+    <div class="demo-phone fade-in">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-header">
+            <div class="phone-header-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M12 3L2 9.5V21H9V15H15V21H22V9.5L12 3Z" stroke="rgba(255,255,255,0.9)" stroke-width="1.5" stroke-linejoin="round"/>
+                <circle cx="18" cy="7" r="4" fill="rgba(0,10,50,0.7)"/>
+                <circle cx="18" cy="7" r="1.6" fill="#fff"/>
+                <path d="M18 11L18 15" stroke="rgba(255,255,255,0.5)" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="phone-title"><span class="prop">Prop</span><span class="id">ID</span></div>
+          </div>
+          <div class="gps-card">
+            <div class="gps-dot"></div>
+            <div class="gps-text">
+              <strong>GPS Verified</strong>
+              55 Oneida Cres, Richmond Hill
+            </div>
+          </div>
+          <div class="phone-label">Room Photos</div>
+          <div class="photo-grid">
+            <div>
+              <div class="photo-slot photo-slot-done"></div>
+              <div class="room-label" style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,0.3);margin-top:4px;">Front Exterior</div>
+            </div>
+            <div>
+              <div class="photo-slot photo-slot-done"></div>
+              <div class="room-label" style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,0.3);margin-top:4px;">Living Room</div>
+            </div>
+            <div>
+              <div class="photo-slot photo-slot-active"></div>
+              <div class="room-label" style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,0.3);margin-top:4px;">Kitchen</div>
+            </div>
+            <div>
+              <div class="photo-slot photo-slot-empty"></div>
+              <div class="room-label" style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,0.3);margin-top:4px;">Primary Bed</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,0.3);">PROGRESS</span>
+            <span style="font-family:'DM Mono',monospace;font-size:9px;color:#4d8fff;">2 / 8 rooms</span>
+          </div>
+          <div style="background:rgba(255,255,255,0.06);border-radius:100px;height:4px;overflow:hidden;">
+            <div style="width:25%;height:100%;background:var(--blue);border-radius:100px;"></div>
+          </div>
+          <div class="verify-bar">📸 Take Kitchen Photo</div>
+        </div>
+      </div>
+      <div class="phone-glow"></div>
+    </div>
+    <div class="demo-content fade-in delay-2">
+      <div class="section-tag">The homeowner experience</div>
+      <h2>Done from your<br>driveway in <span class="dim">minutes</span></h2>
+      <div class="demo-steps">
+        <div class="demo-step">
+          <div class="demo-step-num">1</div>
+          <div class="demo-step-body">
+            <h4>Open your invite link</h4>
+            <p>No app to install. Works in any mobile browser. Your personal invite is pre-filled with your property details.</p>
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="demo-step-num">2</div>
+          <div class="demo-step-body">
+            <h4>Confirm GPS at the property</h4>
+            <p>PropID verifies you're physically at the address. Photos can only be taken once GPS is confirmed — no remote submissions.</p>
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="demo-step-num">3</div>
+          <div class="demo-step-body">
+            <h4>Photo each room</h4>
+            <p>Guided room-by-room prompts walk you through the home. Each photo is GPS-stamped and securely uploaded.</p>
+          </div>
+        </div>
+        <div class="demo-step">
+          <div class="demo-step-num">4</div>
+          <div class="demo-step-body">
+            <h4>Submit — you're done</h4>
+            <p>Your broker reviews the submission, runs AI analysis, and sends you the completed verified report as a PDF.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- THE REPORT -->
+<div class="report-section" id="the-report">
+  <div class="report-inner">
+    <div class="section-tag fade-in">The PropID Report</div>
+    <h2 class="fade-in delay-1">Everything in one <span class="dim">verified document</span></h2>
+    <p class="section-sub fade-in delay-2">A single PDF that contains all the data lenders, insurers, and brokers need — with a complete audit trail.</p>
+    <div class="report-grid fade-in delay-3">
+      <div class="report-item">
+        <div class="report-item-icon">📍</div>
+        <h4>GPS Verification</h4>
+        <p>Coordinates, timestamp, and map embed proving the homeowner was physically present during documentation.</p>
+      </div>
+      <div class="report-item">
+        <div class="report-item-icon">📸</div>
+        <h4>Room-by-Room Photos</h4>
+        <p>Labeled, GPS-stamped photos of every room with reviewer notes and condition flags.</p>
+      </div>
+      <div class="report-item">
+        <div class="report-item-icon">🏠</div>
+        <h4>Property Details</h4>
+        <p>Beds, baths, sqft, year built, heating, cooling, electrical, basement status — fully documented.</p>
+      </div>
+      <div class="report-item">
+        <div class="report-item-icon">📊</div>
+        <h4>Comparable Sales</h4>
+        <p>Recent sold listings sourced from leading Ontario real estate platforms, included in every report.</p>
+      </div>
+      <div class="report-item">
+        <div class="report-item-icon">💰</div>
+        <h4>Estimated Value Range</h4>
+        <p>AI-generated market value estimate with confidence level and supporting rationale.</p>
+      </div>
+      <div class="report-item">
+        <div class="report-item-icon">⚡</div>
+        <h4>Condition Scores</h4>
+        <p>Interior and exterior condition scored 1–10 by AI, with written market context summary.</p>
+      </div>
+      <div class="report-item">
+        <div class="report-item-icon">🗺️</div>
+        <h4>Map Embed</h4>
+        <p>OpenStreetMap location visualization included in every report for quick verification.</p>
+      </div>
+      <div class="report-item">
+        <div class="report-item-icon">🔗</div>
+        <h4>Active Listings</h4>
+        <p>Current active comparable listings in the area for real-time market context.</p>
+      </div>
+      <div class="report-item">
+        <div class="report-item-icon">📄</div>
+        <h4>Shareable PDF</h4>
+        <p>A single signed document ready to send to your broker, lender, insurer, or appraiser.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOR INDUSTRY -->
+<section id="industry">
+  <div class="section-tag fade-in">For industry</div>
+  <h2 class="fade-in delay-1">Built for the full <span class="dim">real estate ecosystem</span></h2>
+  <p class="section-sub fade-in delay-2">PropID reports are designed to be shared — with lenders, insurers, appraisers, and legal teams.</p>
+  <div class="for-grid">
+    <div class="for-card fade-in">
+      <div class="for-icon blue">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4d8fff" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/></svg>
+      </div>
+      <h3>Homeowners</h3>
+      <p>Document your property before listing, refinancing, or making an insurance claim. A PropID report gives you credibility and speeds up every transaction.</p>
+      <div class="for-list">
+        <div class="for-item">Pre-listing documentation</div>
+        <div class="for-item">Mortgage renewal support</div>
+        <div class="for-item">Insurance claim evidence</div>
+        <div class="for-item">Renovation before / after record</div>
+      </div>
+    </div>
+    <div class="for-card fade-in delay-1">
+      <div class="for-icon green">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <h3>Brokers & Realtors</h3>
+      <p>Send invite links to clients before listing. Get a verified documentation package that differentiates your service and protects all parties.</p>
+      <div class="for-list">
+        <div class="for-item">Invite clients with a single link</div>
+        <div class="for-item">Review submissions in admin dashboard</div>
+        <div class="for-item">Generate PDFs for any stakeholder</div>
+        <div class="for-item">Flag discrepancies before they become problems</div>
+      </div>
+    </div>
+    <div class="for-card fade-in delay-2">
+      <div class="for-icon amber">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+      </div>
+      <h3>Mortgage Lenders</h3>
+      <p>Request a PropID report as part of your underwriting process. GPS-verified photos and AI comparable analysis provide independent property context.</p>
+      <div class="for-list">
+        <div class="for-item">Independent property verification</div>
+        <div class="for-item">GPS-verified location proof</div>
+        <div class="for-item">AI comparable sales data</div>
+        <div class="for-item">Standardized PDF format for file</div>
+      </div>
+    </div>
+    <div class="for-card fade-in delay-3">
+      <div class="for-icon purple">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h3>Insurance Providers</h3>
+      <p>Accept PropID reports for home insurance applications and claim support. Timestamped, GPS-verified photos provide an immutable property baseline.</p>
+      <div class="for-list">
+        <div class="for-item">Pre-policy property documentation</div>
+        <div class="for-item">Claim support with dated evidence</div>
+        <div class="for-item">Condition scores for underwriting</div>
+        <div class="for-item">Standardized format across applicants</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / INVITE REQUEST -->
+<div class="cta-section" id="request">
+  <div class="cta-glow"></div>
+  <div class="section-tag">Early access</div>
+  <h2>Request your invite</h2>
+  <p class="section-sub">PropID is currently invite-only. Brokers and homeowners in Ontario can request early access below.</p>
+  <div class="invite-form">
+    <input type="email" class="invite-input" id="invite-email" placeholder="your@email.com">
+    <button class="invite-btn" id="invite-btn" onclick="submitInvite()">Request Access</button>
+  </div>
+  <div class="form-msg" id="form-msg"></div>
+  <p class="cta-note">Ontario only · No spam · Invite sent within 48 hours</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="nav-icon" style="width:28px;height:28px;border-radius:7px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <path d="M12 3L2 9.5V21H9V15H15V21H22V9.5L12 3Z" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" stroke-linejoin="round"/>
+            <circle cx="18" cy="7" r="4" fill="rgba(0,10,50,0.7)"/>
+            <circle cx="18" cy="7" r="1.6" fill="#fff"/>
+            <path d="M18 11L18 15" stroke="rgba(255,255,255,0.5)" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span style="font-family:var(--display);font-size:15px;font-weight:700;letter-spacing:-0.03em;"><span style="color:#fff;">Prop</span><span style="color:var(--blue-light);">ID</span></span>
+      </div>
+      <span class="footer-copy">© 2026 PropID. Ontario, Canada.</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:24px;">
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="mailto:info@propid.ca">Contact</a>
+      </div>
+      <div class="footer-badge">Your Home. Verified.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>40);
+});
+
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+async function submitInvite(){
+  const emailEl=document.getElementById('invite-email');
+  const btn=document.getElementById('invite-btn');
+  const msg=document.getElementById('form-msg');
+  const email=emailEl.value.trim();
+  if(!email||!email.includes('@')){
+    msg.textContent='Please enter a valid email address.';
+    msg.className='form-msg error';
+    return;
+  }
+  btn.disabled=true;
+  btn.textContent='Sending...';
+  msg.textContent='';
+  try{
+    const res=await fetch('https://propid.vercel.app/api/request-invite',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email,name:'',message:'Website invite request'})
+    });
+    const data=await res.json();
+    if(res.ok){
+      msg.textContent='Request received! We\'ll be in touch within 48 hours.';
+      msg.className='form-msg success';
+      emailEl.value='';
+      btn.textContent='Sent!';
+    }else{
+      throw new Error(data.error||'Something went wrong');
+    }
+  }catch(e){
+    msg.textContent=e.message||'Could not submit. Try emailing info@propid.ca directly.';
+    msg.className='form-msg error';
+    btn.disabled=false;
+    btn.textContent='Request Access';
+  }
+}
+
+document.getElementById('invite-email').addEventListener('keydown',e=>{
+  if(e.key==='Enter')submitInvite();
+});
+</script>
+</body>
+</html>
