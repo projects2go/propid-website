@@ -596,7 +596,7 @@ async function submitInvite(){
   btn.textContent='Sending...';
   msg.textContent='';
   try{
-    const res=await fetch('https://propid.vercel.app/api/request-invite',{
+ const res=await fetch('https://app.propid.ca/api/request-invite',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({email,name:'',message:'Website invite request'})
