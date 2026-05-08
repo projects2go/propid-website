@@ -4,79 +4,52 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PropID — Your Home. Verified.</title>
-<meta name="description" content="GPS-verified property documentation for Ontario homeowners, brokers, lenders, and insurers. AI-powered comparable analysis. A single verified PDF report.">
+<meta name="description" content="GPS-verified property documentation. AI-powered comparable analysis. A single verified, tamper-evident PDF report — for homeowners, brokers, lenders, and insurers.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-
-/* ── DARK THEME (default) ───────────────────────────────── */
 :root[data-theme="dark"]{
-  --blue:#1666f8;
-  --blue-light:#4d8fff;
-  --blue-dim:rgba(22,102,248,0.12);
-  --bg:#06060f;
-  --bg2:#0c0c1a;
-  --bg3:#111124;
+  --blue:#1666f8;--blue-light:#4d8fff;--blue-dim:rgba(22,102,248,0.12);
+  --bg:#06060f;--bg2:#0c0c1a;--bg3:#111124;
   --surface:rgba(255,255,255,0.04);
-  --border:rgba(255,255,255,0.07);
-  --border-strong:rgba(255,255,255,0.12);
-  --border-blue:rgba(22,102,248,0.35);
-  --text:#ffffff;
-  --text2:rgba(255,255,255,0.55);
-  --text3:rgba(255,255,255,0.3);
+  --border:rgba(255,255,255,0.07);--border-strong:rgba(255,255,255,0.12);--border-blue:rgba(22,102,248,0.35);
+  --text:#ffffff;--text2:rgba(255,255,255,0.55);--text3:rgba(255,255,255,0.3);
   --nav-bg:rgba(6,6,15,0.92);
   --shadow:0 40px 80px rgba(0,0,0,0.6);
 }
-
-/* ── LIGHT THEME ───────────────────────────────── */
 :root[data-theme="light"]{
-  --blue:#1666f8;
-  --blue-light:#0047d1;
-  --blue-dim:rgba(22,102,248,0.08);
-  --bg:#fafbff;
-  --bg2:#ffffff;
-  --bg3:#f0f3fa;
+  --blue:#1666f8;--blue-light:#0047d1;--blue-dim:rgba(22,102,248,0.08);
+  --bg:#fafbff;--bg2:#ffffff;--bg3:#f0f3fa;
   --surface:rgba(22,102,248,0.04);
-  --border:rgba(10,10,40,0.08);
-  --border-strong:rgba(10,10,40,0.14);
-  --border-blue:rgba(22,102,248,0.3);
-  --text:#0a0a1f;
-  --text2:rgba(10,10,40,0.65);
-  --text3:rgba(10,10,40,0.4);
+  --border:rgba(10,10,40,0.08);--border-strong:rgba(10,10,40,0.14);--border-blue:rgba(22,102,248,0.3);
+  --text:#0a0a1f;--text2:rgba(10,10,40,0.65);--text3:rgba(10,10,40,0.4);
   --nav-bg:rgba(250,251,255,0.92);
   --shadow:0 20px 60px rgba(10,10,40,0.08);
 }
-
-:root{
-  --mono:'DM Mono',monospace;
-  --sans:'DM Sans',sans-serif;
-  --display:'Sora',sans-serif;
-  --radius:16px;
-}
-
+:root{--mono:'DM Mono',monospace;--sans:'DM Sans',sans-serif;--display:'Sora',sans-serif;--radius:16px;}
 html{scroll-behavior:smooth;scroll-padding-top:90px;}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden;line-height:1.6;transition:background 0.3s,color 0.3s;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden;line-height:1.6;transition:background .3s,color .3s;}
 
-/* ── NAV ─────────────────────────────────────────────── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid transparent;transition:all 0.3s;}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid transparent;transition:all .3s;}
 nav.scrolled{background:var(--nav-bg);border-bottom-color:var(--border);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);}
 .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
 .nav-icon{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#1666f8,#0047d1);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .nav-wordmark{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:-0.04em;line-height:1;}
 .nav-wordmark .prop{color:var(--text);}
 .nav-wordmark .id{color:var(--blue-light);}
-  .nav-tagline{font-family:var(--mono);font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue-light);opacity:0.7;margin-top:2px;}
+.nav-tagline{font-family:var(--mono);font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue-light);opacity:0.7;margin-top:2px;}
 .nav-links{display:flex;align-items:center;gap:28px;}
-.nav-links a{color:var(--text2);text-decoration:none;font-size:14px;font-weight:400;transition:color 0.2s;}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:14px;font-weight:400;transition:color .2s;cursor:pointer;}
 .nav-links a:hover{color:var(--text);}
 .nav-right{display:flex;align-items:center;gap:12px;}
-.theme-toggle{width:38px;height:38px;border-radius:9px;border:1px solid var(--border);background:var(--bg2);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.theme-toggle{width:38px;height:38px;border-radius:9px;border:1px solid var(--border);background:var(--bg2);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
 .theme-toggle:hover{border-color:var(--border-strong);color:var(--text);}
-.nav-cta{background:var(--blue);color:#fff;padding:9px 20px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;transition:opacity 0.2s;border:none;cursor:pointer;font-family:var(--sans);}
-.nav-cta:hover{opacity:0.85;}
+.nav-cta{background:var(--blue);color:#fff;padding:9px 20px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;transition:opacity .2s;border:none;cursor:pointer;font-family:var(--sans);display:inline-block;}
+.nav-cta:hover{opacity:0.85;color:#fff;text-decoration:none;}
 
-/* ── HERO ─────────────────────────────────────────────── */
+/* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;position:relative;overflow:hidden;}
 .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(128,128,160,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(128,128,160,0.06) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 60% at 50% 50%,black,transparent);-webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 50%,black,transparent);}
 .hero-glow{position:absolute;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(22,102,248,0.15) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
@@ -87,30 +60,30 @@ h1{font-family:var(--display);font-weight:800;font-size:clamp(42px,7vw,84px);let
 h1 .blue{color:var(--blue-light);}
 .hero-sub{font-size:clamp(16px,2vw,20px);color:var(--text2);max-width:600px;margin:0 auto 48px;line-height:1.7;font-weight:300;}
 .hero-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;}
-.btn-primary{background:var(--blue);color:#fff;padding:16px 32px;border-radius:10px;font-size:15px;font-weight:500;text-decoration:none;transition:all 0.2s;border:1px solid transparent;cursor:pointer;font-family:var(--sans);display:inline-flex;align-items:center;gap:8px;}
-.btn-primary:hover{background:#1259e0;transform:translateY(-1px);}
-.btn-secondary{color:var(--text);padding:16px 32px;border-radius:10px;font-size:15px;font-weight:400;text-decoration:none;border:1px solid var(--border-strong);transition:all 0.2s;cursor:pointer;font-family:var(--sans);background:transparent;display:inline-flex;align-items:center;gap:8px;}
-.btn-secondary:hover{border-color:var(--blue-light);color:var(--blue-light);}
+.btn-primary{background:var(--blue);color:#fff;padding:16px 32px;border-radius:10px;font-size:15px;font-weight:500;text-decoration:none;transition:all .2s;border:1px solid transparent;cursor:pointer;font-family:var(--sans);display:inline-flex;align-items:center;gap:8px;}
+.btn-primary:hover{background:#1259e0;transform:translateY(-1px);color:#fff;text-decoration:none;}
+.btn-secondary{color:var(--text);padding:16px 32px;border-radius:10px;font-size:15px;font-weight:400;text-decoration:none;border:1px solid var(--border-strong);transition:all .2s;cursor:pointer;font-family:var(--sans);background:transparent;display:inline-flex;align-items:center;gap:8px;}
+.btn-secondary:hover{border-color:var(--blue-light);color:var(--blue-light);text-decoration:none;}
 .hero-stats{display:flex;align-items:center;gap:48px;margin-top:64px;padding-top:48px;border-top:1px solid var(--border);flex-wrap:wrap;justify-content:center;}
 .hero-stat{text-align:center;}
 .hero-stat-num{font-family:var(--display);font-size:32px;font-weight:700;color:var(--text);letter-spacing:-0.03em;}
 .hero-stat-label{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);margin-top:4px;}
 
-/* ── TRUST STRIP ──────────────────────────────────────── */
+/* TRUST */
 .trust{padding:48px 40px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
 .trust-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:center;}
 .trust-label{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);margin-right:8px;white-space:nowrap;}
 .trust-badge{display:flex;align-items:center;gap:10px;padding:10px 18px;border:1px solid var(--border);border-radius:100px;font-size:13px;color:var(--text2);background:var(--bg2);}
 .trust-badge svg{opacity:0.6;}
 
-/* ── SECTION ──────────────────────────────────────────── */
+/* SECTION */
 section{max-width:1100px;margin:0 auto;padding:100px 40px;}
 .section-tag{font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--blue-light);margin-bottom:16px;}
 h2{font-family:var(--display);font-size:clamp(32px,4vw,48px);font-weight:700;letter-spacing:-0.03em;line-height:1.1;margin-bottom:20px;}
 h2 .dim{color:var(--text2);}
 .section-sub{font-size:17px;color:var(--text2);max-width:560px;font-weight:300;line-height:1.7;}
 
-/* ── HOW IT WORKS ─────────────────────────────────────── */
+/* HOW IT WORKS */
 .steps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;margin-top:64px;}
 .step{background:var(--bg2);padding:48px 40px;position:relative;overflow:hidden;border:1px solid var(--border);}
 .step:first-child{border-radius:var(--radius) 0 0 var(--radius);}
@@ -121,7 +94,7 @@ h2 .dim{color:var(--text2);}
 .step p{font-size:14px;color:var(--text2);line-height:1.7;}
 .step-connector{position:absolute;right:-12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:2;color:#fff;font-size:12px;font-weight:700;}
 
-/* ── PHONE DEMO ───────────────────────────────────────── */
+/* PHONE DEMO */
 .demo-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
 .demo-inner{max-width:1100px;margin:0 auto;padding:100px 40px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
 .demo-phone{position:relative;display:flex;justify-content:center;}
@@ -160,9 +133,22 @@ h2 .dim{color:var(--text2);}
 .demo-step-body h4{font-family:var(--display);font-size:15px;font-weight:600;margin-bottom:4px;color:var(--text);}
 .demo-step-body p{font-size:13px;color:var(--text2);line-height:1.6;}
 
-/* ── INDUSTRY CARDS ───────────────────────────────────── */
+/* VERIFY SECTION */
+.verify-section{background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:100px 40px;text-align:center;}
+.verify-inner{max-width:780px;margin:0 auto;}
+.verify-card-demo{background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:32px;margin:48px auto 0;max-width:520px;text-align:left;box-shadow:var(--shadow);}
+.verify-card-status{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#22c55e;margin-bottom:16px;}
+.verify-card-status .dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 10px rgba(34,197,94,0.6);}
+.verify-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.verify-row:last-child{border-bottom:none;}
+.verify-row .label{color:var(--text2);}
+.verify-row .value{color:var(--text);font-weight:500;font-family:var(--mono);}
+.verify-id-block{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;color:var(--text3);text-transform:uppercase;margin-top:18px;padding-top:18px;border-top:1px solid var(--border);text-align:center;}
+.verify-id-block .val{display:block;font-size:18px;color:var(--blue-light);margin-top:6px;letter-spacing:0.04em;}
+
+/* INDUSTRY CARDS */
 .for-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:64px;}
-.for-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:36px;transition:border-color 0.3s,transform 0.3s;}
+.for-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:36px;transition:border-color .3s,transform .3s;}
 .for-card:hover{border-color:var(--border-blue);transform:translateY(-2px);}
 .for-icon{width:48px;height:48px;border-radius:12px;margin-bottom:20px;display:flex;align-items:center;justify-content:center;}
 .for-icon.blue{background:var(--blue-dim);border:1px solid var(--border-blue);color:var(--blue-light);}
@@ -175,17 +161,17 @@ h2 .dim{color:var(--text2);}
 .for-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--text2);}
 .for-item::before{content:'';width:14px;height:14px;border-radius:50%;background:var(--blue-dim);border:1px solid var(--border-blue);flex-shrink:0;margin-top:3px;}
 
-/* ── REPORT GRID ─────────────────────────────────────── */
+/* REPORT GRID */
 .report-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
 .report-inner{max-width:1100px;margin:0 auto;padding:100px 40px;}
 .report-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:48px;}
-.report-item{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:22px;transition:border-color 0.3s;}
+.report-item{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:22px;transition:border-color .3s;}
 .report-item:hover{border-color:var(--border-blue);}
 .report-item-icon{width:36px;height:36px;border-radius:9px;background:var(--blue-dim);border:1px solid var(--border-blue);display:flex;align-items:center;justify-content:center;color:var(--blue-light);margin-bottom:14px;}
 .report-item h4{font-family:var(--display);font-size:14px;font-weight:600;margin-bottom:6px;color:var(--text);}
 .report-item p{font-size:12px;color:var(--text2);line-height:1.6;}
 
-/* ── TRUST BADGES ────────────────────────────────────── */
+/* SECURITY */
 .security-section{padding:80px 40px;border-bottom:1px solid var(--border);}
 .security-inner{max-width:1100px;margin:0 auto;}
 .security-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px;}
@@ -194,20 +180,20 @@ h2 .dim{color:var(--text2);}
 .sec-card h4{font-family:var(--display);font-size:14px;font-weight:600;margin-bottom:6px;color:var(--text);}
 .sec-card p{font-size:12px;color:var(--text2);line-height:1.5;}
 
-/* ── FAQ ─────────────────────────────────────────────── */
+/* FAQ */
 .faq-section{padding:100px 40px;border-bottom:1px solid var(--border);}
 .faq-inner{max-width:780px;margin:0 auto;}
 .faq-list{margin-top:48px;}
-.faq-item{border:1px solid var(--border);border-radius:12px;margin-bottom:8px;background:var(--bg2);overflow:hidden;transition:border-color 0.2s;}
+.faq-item{border:1px solid var(--border);border-radius:12px;margin-bottom:8px;background:var(--bg2);overflow:hidden;transition:border-color .2s;}
 .faq-item.open{border-color:var(--border-blue);}
 .faq-q{padding:18px 22px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-size:15px;font-weight:500;color:var(--text);user-select:none;}
 .faq-q:hover{background:var(--surface);}
-.faq-toggle{width:24px;height:24px;display:flex;align-items:center;justify-content:center;color:var(--text3);transition:transform 0.3s;flex-shrink:0;}
+.faq-toggle{width:24px;height:24px;display:flex;align-items:center;justify-content:center;color:var(--text3);transition:transform .3s;flex-shrink:0;}
 .faq-item.open .faq-toggle{transform:rotate(45deg);color:var(--blue-light);}
-.faq-a{padding:0 22px;max-height:0;overflow:hidden;transition:max-height 0.3s ease,padding 0.3s ease;font-size:14px;color:var(--text2);line-height:1.7;}
-.faq-item.open .faq-a{padding:0 22px 18px;max-height:300px;}
+.faq-a{padding:0 22px;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease;font-size:14px;color:var(--text2);line-height:1.7;}
+.faq-item.open .faq-a{padding:0 22px 18px;max-height:400px;}
 
-/* ── CTA SECTION ─────────────────────────────────────── */
+/* CTA */
 .cta-section{text-align:center;padding:120px 40px;position:relative;overflow:hidden;}
 .cta-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(22,102,248,0.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
 .cta-section h2{max-width:700px;margin:24px auto 16px;}
@@ -215,25 +201,25 @@ h2 .dim{color:var(--text2);}
 .cta-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;}
 .cta-note{font-size:12px;color:var(--text3);margin-top:24px;font-family:var(--mono);letter-spacing:0.08em;}
 
-/* ── FOOTER ──────────────────────────────────────────── */
+/* FOOTER */
 footer{border-top:1px solid var(--border);padding:48px 40px;}
 .footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;}
 .footer-left{display:flex;align-items:center;gap:16px;}
 .footer-copy{font-size:13px;color:var(--text3);}
-.footer-links{display:flex;gap:24px;}
-.footer-links a{font-size:13px;color:var(--text3);text-decoration:none;transition:color 0.2s;}
+.footer-links{display:flex;gap:24px;flex-wrap:wrap;}
+.footer-links a{font-size:13px;color:var(--text3);text-decoration:none;transition:color .2s;}
 .footer-links a:hover{color:var(--text2);}
 .footer-badge{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text3);border:1px solid var(--border);border-radius:4px;padding:3px 8px;}
 
-/* ── ANIMATIONS ──────────────────────────────────────── */
-.fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease;}
+/* ANIMATIONS */
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
 .fade-in.visible{opacity:1;transform:translateY(0);}
 .delay-1{transition-delay:0.1s;}
 .delay-2{transition-delay:0.2s;}
 .delay-3{transition-delay:0.3s;}
 .delay-4{transition-delay:0.4s;}
 
-/* ── RESPONSIVE ──────────────────────────────────────── */
+/* RESPONSIVE */
 @media(max-width:900px){
   .security-grid{grid-template-columns:repeat(2,1fr);}
   .report-grid{grid-template-columns:1fr 1fr;}
@@ -249,7 +235,7 @@ footer{border-top:1px solid var(--border);padding:48px 40px;}
   .demo-inner{grid-template-columns:1fr;gap:40px;}
   .for-grid{grid-template-columns:1fr;}
   .report-grid{grid-template-columns:1fr;}
-  .security-section,.faq-section{padding:60px 20px;}
+  .security-section,.faq-section,.verify-section{padding:60px 20px;}
   .footer-inner{flex-direction:column;align-items:flex-start;}
   .demo-section .demo-inner{padding:60px 20px;}
   .report-section .report-inner{padding:60px 20px;}
@@ -260,13 +246,13 @@ footer{border-top:1px solid var(--border);padding:48px 40px;}
 
 <!-- NAV -->
 <nav id="nav">
-<a href="#top" class="nav-logo">
+  <a href="#top" class="nav-logo">
     <div class="nav-icon">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
         <path d="M12 3L2 9.5V21H9V15H15V21H22V9.5L12 3Z" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" stroke-linejoin="round"/>
-        <circle cx="18" cy="7" r="4" fill="rgba(0,20,90,0.7)"/>
-        <circle cx="18" cy="7" r="1.6" fill="#ffffff"/>
-        <path d="M18 11L18 15" stroke="rgba(255,255,255,0.5)" stroke-width="1.2" stroke-linecap="round"/>
+        <circle cx="18" cy="7" r="4.2" fill="rgba(0,20,90,0.7)"/>
+        <circle cx="18" cy="7" r="1.7" fill="#ffffff"/>
+        <path d="M18 11.2L18 15.5" stroke="rgba(255,255,255,0.55)" stroke-width="1.3" stroke-linecap="round"/>
       </svg>
     </div>
     <div>
@@ -277,6 +263,7 @@ footer{border-top:1px solid var(--border);padding:48px 40px;}
   <div class="nav-links">
     <a href="#how-it-works">How it works</a>
     <a href="#the-report">The report</a>
+    <a href="#verify">Verify</a>
     <a href="#industry">For industry</a>
     <a href="#faq">FAQ</a>
   </div>
@@ -289,7 +276,7 @@ footer{border-top:1px solid var(--border);padding:48px 40px;}
         <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
       </svg>
     </button>
-    <a href="https://app.propid.ca/request-invite.html" class="nav-cta">Request Invite</a>
+    <a href="https://app.propid.ca/request-invite" class="nav-cta">Request invite</a>
   </div>
 </nav>
 
@@ -297,21 +284,18 @@ footer{border-top:1px solid var(--border);padding:48px 40px;}
 <div class="hero" id="top">
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
-  <div class="hero-pill">
-    <span class="hero-pill-dot"></span>
-    Now accepting early access
-  </div>
+  <div class="hero-pill"><span class="hero-pill-dot"></span>Now accepting early access</div>
   <h1>The verified property<br>report that <span class="blue">everyone</span><br>can trust</h1>
-  <p class="hero-sub">GPS-stamped photos. AI-powered comparable analysis. A single verified document for homeowners, brokers, lenders, and insurers.</p>
+  <p class="hero-sub">GPS-stamped photos. AI-powered comparable analysis. A single tamper-evident document for homeowners, brokers, lenders, and insurers.</p>
   <div class="hero-actions">
-    <a href="https://app.propid.ca/request-invite.html" class="btn-primary">Request Early Access →</a>
-    <a href="#how-it-works" class="btn-secondary">See how it works</a>
+    <a href="https://app.propid.ca/request-invite" class="btn-primary">Request early access →</a>
+    <a href="https://app.propid.ca/guide.html" class="btn-secondary">Read the guide</a>
   </div>
   <div class="hero-stats">
-    <div class="hero-stat"><div class="hero-stat-num">GPS</div><div class="hero-stat-label">Location Verified</div></div>
-    <div class="hero-stat"><div class="hero-stat-num">AI</div><div class="hero-stat-label">Comparable Analysis</div></div>
-    <div class="hero-stat"><div class="hero-stat-num">PDF</div><div class="hero-stat-label">Signed Report</div></div>
-    <div class="hero-stat"><div class="hero-stat-num">ON</div><div class="hero-stat-label">Ontario Focused</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">GPS</div><div class="hero-stat-label">Location verified</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">AI</div><div class="hero-stat-label">Comparable analysis</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">PDF</div><div class="hero-stat-label">Signed report</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">QR</div><div class="hero-stat-label">Tamper-evident</div></div>
   </div>
 </div>
 
@@ -351,7 +335,7 @@ footer{border-top:1px solid var(--border);padding:48px 40px;}
       <div class="step-num">03 —</div>
       <div class="step-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
       <h3>Receive your verified report</h3>
-      <p>Our AI analyzes real comparable sales. A certified PDF report is generated with photos, GPS data, property details, and market analysis — ready to share.</p>
+      <p>Our AI analyzes real comparable sales. A signed PDF report is generated with photos, GPS data, property details, and market analysis — ready to share, with a QR code anyone can scan to verify it.</p>
     </div>
   </div>
 </section>
@@ -376,21 +360,21 @@ footer{border-top:1px solid var(--border);padding:48px 40px;}
           </div>
           <div class="gps-card">
             <div class="gps-dot"></div>
-            <div class="gps-text"><strong>GPS Verified</strong>55 Oneida Cres, Richmond Hill</div>
+            <div class="gps-text"><strong>GPS verified</strong>55 Oneida Cres, Richmond Hill</div>
           </div>
-          <div class="phone-label">Room Photos</div>
+          <div class="phone-label">Room photos</div>
           <div class="photo-grid">
-            <div><div class="photo-slot photo-slot-done"></div><div class="room-cap">Front Exterior</div></div>
-            <div><div class="photo-slot photo-slot-done"></div><div class="room-cap">Living Room</div></div>
+            <div><div class="photo-slot photo-slot-done"></div><div class="room-cap">Front exterior</div></div>
+            <div><div class="photo-slot photo-slot-done"></div><div class="room-cap">Living room</div></div>
             <div><div class="photo-slot photo-slot-active"></div><div class="room-cap">Kitchen</div></div>
-            <div><div class="photo-slot photo-slot-empty"></div><div class="room-cap">Primary Bed</div></div>
+            <div><div class="photo-slot photo-slot-empty"></div><div class="room-cap">Primary bed</div></div>
           </div>
           <div class="phone-progress-row">
-            <span class="phone-progress-label">PROGRESS</span>
+            <span class="phone-progress-label">Progress</span>
             <span class="phone-progress-val">2 / 8 rooms</span>
           </div>
           <div class="phone-progress-bar"><div class="phone-progress-fill"></div></div>
-          <div class="verify-bar">📸 Take Kitchen Photo</div>
+          <div class="verify-bar">📸 Take kitchen photo</div>
         </div>
       </div>
       <div class="phone-glow"></div>
@@ -411,19 +395,41 @@ footer{border-top:1px solid var(--border);padding:48px 40px;}
 <!-- THE REPORT -->
 <div class="report-section" id="the-report">
   <div class="report-inner">
-    <div class="section-tag fade-in">The PropID Report</div>
+    <div class="section-tag fade-in">The PropID report</div>
     <h2 class="fade-in delay-1">Everything in one <span class="dim">verified document</span></h2>
-    <p class="section-sub fade-in delay-2">A single PDF that contains all the data lenders, insurers, and brokers need — with a complete audit trail.</p>
+    <p class="section-sub fade-in delay-2">A single PDF that contains all the data lenders, insurers, and brokers need — with a complete audit trail and a QR code anyone can scan to verify.</p>
     <div class="report-grid fade-in delay-3">
-      <div class="report-item"><div class="report-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 00-8 8c0 5.333 8 14 8 14s8-8.667 8-14a8 8 0 00-8-8z"/></svg></div><h4>GPS Verification</h4><p>Coordinates, timestamp, and map embed proving the homeowner was on-site.</p></div>
-      <div class="report-item"><div class="report-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="6" width="20" height="14" rx="2"/><circle cx="12" cy="13" r="3"/><path d="M9 6l1.5-3h3L15 6"/></svg></div><h4>Room-by-Room Photos</h4><p>Labeled, GPS-stamped photos of every room with reviewer notes.</p></div>
-      <div class="report-item"><div class="report-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path d="M9 22V12h6v10"/></svg></div><h4>Property Details</h4><p>Beds, baths, sqft, year built, heating, cooling, electrical — fully documented.</p></div>
-      <div class="report-item"><div class="report-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div><h4>Comparable Sales</h4><p>Recent sold listings sourced from leading Ontario real estate platforms.</p></div>
-      <div class="report-item"><div class="report-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><h4>Estimated Value Range</h4><p>AI-generated market value estimate with confidence level and rationale.</p></div>
-      <div class="report-item"><div class="report-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h4>Condition Scores</h4><p>Interior and exterior condition scored 1–10 by AI with written context.</p></div>
-      <div class="report-item"><div class="report-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg></div><h4>Map Embed</h4><p>OpenStreetMap location visualization included in every report.</p></div>
-      <div class="report-item"><div class="report-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></div><h4>Active Listings</h4><p>Current active comparable listings in the area for real-time context.</p></div>
+      <div class="report-item"><div class="report-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 00-8 8c0 5.333 8 14 8 14s8-8.667 8-14a8 8 0 00-8-8z"/></svg></div><h4>GPS verification</h4><p>Coordinates, timestamp, and map embed proving the homeowner was on-site.</p></div>
+      <div class="report-item"><div class="report-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="6" width="20" height="14" rx="2"/><circle cx="12" cy="13" r="3"/><path d="M9 6l1.5-3h3L15 6"/></svg></div><h4>Room-by-room photos</h4><p>Labeled, GPS-stamped photos of every room. Six per page in the final PDF.</p></div>
+      <div class="report-item"><div class="report-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path d="M9 22V12h6v10"/></svg></div><h4>Property details</h4><p>Beds, baths, sqft, year built, heating, cooling, electrical — fully documented.</p></div>
+      <div class="report-item"><div class="report-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div><h4>Comparable sales</h4><p>Recent sold listings sourced live from HouseSigma, Realtor.ca, Zolo, and Zoocasa.</p></div>
+      <div class="report-item"><div class="report-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><h4>Estimated value range</h4><p>AI-generated market value estimate with confidence level and rationale.</p></div>
+      <div class="report-item"><div class="report-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h4>Six-tier condition rating</h4><p>From excellent to very poor — with a written rationale and adjustment percentage applied to the value.</p></div>
+      <div class="report-item"><div class="report-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><line x1="14" y1="14" x2="14" y2="21"/><line x1="18" y1="14" x2="21" y2="14"/></svg></div><h4>QR verification code</h4><p>Anyone receiving the report can scan to confirm it was issued by PropID and hasn't been altered.</p></div>
+      <div class="report-item"><div class="report-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg></div><h4>Map embed</h4><p>OpenStreetMap visualization showing both the GPS capture point and the entered address.</p></div>
       <div class="report-item"><div class="report-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg></div><h4>Shareable PDF</h4><p>A single signed document ready to send to brokers, lenders, or insurers.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- VERIFY SECTION -->
+<div class="verify-section" id="verify">
+  <div class="verify-inner">
+    <div class="section-tag fade-in" style="text-align:center;">Verify a report</div>
+    <h2 class="fade-in delay-1">Anyone can confirm a <span class="dim">PropID report is real</span></h2>
+    <p class="section-sub fade-in delay-2" style="margin:0 auto;">Every report has a unique ID and a QR code on the cover. Lenders, insurers, or anyone the report is shared with can scan or visit <a href="https://app.propid.ca/verify" style="color:var(--blue-light);text-decoration:none;">app.propid.ca/verify</a> to confirm the report was issued by PropID and the document hasn't been tampered with — without exposing the full address, value, or any private detail.</p>
+
+    <div class="verify-card-demo fade-in delay-3">
+      <div class="verify-card-status"><span class="dot"></span>Verified</div>
+      <div class="verify-row"><span class="label">Property type</span><span class="value">Detached</span></div>
+      <div class="verify-row"><span class="label">Location</span><span class="value">Richmond Hill · L4C 7N1</span></div>
+      <div class="verify-row"><span class="label">Issued</span><span class="value">May 8, 2026</span></div>
+      <div class="verify-row"><span class="label">GPS-verified photos</span><span class="value">22</span></div>
+      <div class="verify-id-block">Report ID<span class="val">PROPID-A7C6-EF9F</span></div>
+    </div>
+
+    <div style="margin-top:32px;">
+      <a href="https://app.propid.ca/verify" class="btn-secondary">Try the verify page →</a>
     </div>
   </div>
 </div>
@@ -435,23 +441,23 @@ footer{border-top:1px solid var(--border);padding:48px 40px;}
   <p class="section-sub fade-in delay-2">PropID reports are designed to be shared — with lenders, insurers, appraisers, and legal teams.</p>
   <div class="for-grid">
     <div class="for-card fade-in"><div class="for-icon blue"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/></svg></div><h3>Homeowners</h3><p>Document your property before listing, refinancing, or making an insurance claim. A PropID report gives you credibility and speeds up every transaction.</p><div class="for-list"><div class="for-item">Pre-listing documentation</div><div class="for-item">Mortgage renewal support</div><div class="for-item">Insurance claim evidence</div><div class="for-item">Renovation before / after record</div></div></div>
-    <div class="for-card fade-in delay-1"><div class="for-icon green"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><h3>Brokers & Realtors</h3><p>Send invite links to clients before listing. Get a verified documentation package that differentiates your service and protects all parties.</p><div class="for-list"><div class="for-item">Invite clients with a single link</div><div class="for-item">Review submissions in admin dashboard</div><div class="for-item">Generate PDFs for any stakeholder</div><div class="for-item">Flag discrepancies before they become problems</div></div></div>
-    <div class="for-card fade-in delay-2"><div class="for-icon amber"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div><h3>Mortgage Lenders</h3><p>Request a PropID report as part of your underwriting process. GPS-verified photos and AI comparable analysis provide independent property context.</p><div class="for-list"><div class="for-item">Independent property verification</div><div class="for-item">GPS-verified location proof</div><div class="for-item">AI comparable sales data</div><div class="for-item">Standardized PDF format for file</div></div></div>
-    <div class="for-card fade-in delay-3"><div class="for-icon purple"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Insurance Providers</h3><p>Accept PropID reports for home insurance applications and claim support. Timestamped, GPS-verified photos provide an immutable property baseline.</p><div class="for-list"><div class="for-item">Pre-policy property documentation</div><div class="for-item">Claim support with dated evidence</div><div class="for-item">Condition scores for underwriting</div><div class="for-item">Standardized format across applicants</div></div></div>
+    <div class="for-card fade-in delay-1"><div class="for-icon green"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><h3>Brokers & realtors</h3><p>Send invite links to clients before listing. Get a verified documentation package that differentiates your service and protects all parties.</p><div class="for-list"><div class="for-item">Invite clients with a single link</div><div class="for-item">Review submissions in admin dashboard</div><div class="for-item">Generate PDFs for any stakeholder</div><div class="for-item">Flag discrepancies before they become problems</div></div></div>
+    <div class="for-card fade-in delay-2"><div class="for-icon amber"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div><h3>Mortgage lenders</h3><p>Request a PropID report as part of your underwriting process. GPS-verified photos and AI comparable analysis provide independent property context.</p><div class="for-list"><div class="for-item">Independent property verification</div><div class="for-item">GPS-verified location proof</div><div class="for-item">AI comparable sales data</div><div class="for-item">Standardized PDF format for file</div></div></div>
+    <div class="for-card fade-in delay-3"><div class="for-icon purple"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Insurance providers</h3><p>Accept PropID reports for home insurance applications and claim support. Timestamped, GPS-verified photos provide an immutable property baseline.</p><div class="for-list"><div class="for-item">Pre-policy property documentation</div><div class="for-item">Claim support with dated evidence</div><div class="for-item">Condition rating for underwriting</div><div class="for-item">Standardized format across applicants</div></div></div>
   </div>
 </section>
 
-<!-- SECURITY / TRUST BADGES -->
+<!-- SECURITY -->
 <div class="security-section">
   <div class="security-inner">
     <div class="section-tag fade-in" style="text-align:center;">Privacy & security</div>
     <h2 class="fade-in delay-1" style="text-align:center;">Your data is <span class="dim">handled with care</span></h2>
     <p class="section-sub fade-in delay-2" style="text-align:center;margin:0 auto;">PropID is built privacy-first. Photos and personal data are encrypted in transit and at rest, and never shared without consent.</p>
     <div class="security-grid fade-in delay-3">
-      <div class="sec-card"><div class="sec-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><h4>Encrypted Storage</h4><p>All photos stored in encrypted, access-controlled buckets.</p></div>
-      <div class="sec-card"><div class="sec-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div><h4>Privacy First</h4><p>Your data is yours. Reports are only shared with parties you authorize.</p></div>
-      <div class="sec-card"><div class="sec-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></div><h4>Invite-Only Access</h4><p>No public signups. Each link is unique, time-limited, and one-time use.</p></div>
-      <div class="sec-card"><div class="sec-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><h4>Full Audit Trail</h4><p>Every action timestamped. GPS, photos, and changes fully traceable.</p></div>
+      <div class="sec-card"><div class="sec-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><h4>Encrypted storage</h4><p>All photos stored in encrypted, access-controlled buckets.</p></div>
+      <div class="sec-card"><div class="sec-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div><h4>Privacy first</h4><p>Your data is yours. Reports are only shared with parties you authorize.</p></div>
+      <div class="sec-card"><div class="sec-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></div><h4>Invite-only access</h4><p>No public signups. Each link is unique, time-limited, and one-time use.</p></div>
+      <div class="sec-card"><div class="sec-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><h4>Full audit trail</h4><p>Every action timestamped. GPS, photos, and changes fully traceable.</p></div>
     </div>
   </div>
 </div>
@@ -464,15 +470,19 @@ footer{border-top:1px solid var(--border);padding:48px 40px;}
     <div class="faq-list fade-in delay-2">
       <div class="faq-item">
         <div class="faq-q">How long does it take to complete a PropID report?<span class="faq-toggle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
-        <div class="faq-a">For homeowners, it typically takes 15–25 minutes from opening the invite link to submitting. Once submitted, brokers review and finalize the report within 24 hours.</div>
+        <div class="faq-a">For homeowners, it typically takes 15–25 minutes from opening the invite link to submitting. The AI analysis and PDF are usually ready within an hour after submission.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Is my data private?<span class="faq-toggle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
-        <div class="faq-a">Yes. All photos and information are stored encrypted with strict access controls. Reports are only shared with parties you specifically authorize. We never sell or rent personal data.</div>
+        <div class="faq-a">Yes. All photos and information are stored encrypted with strict access controls. Reports are only shared with parties you specifically authorize. We never sell or rent personal data. The public verify page only shows the city and postal code — never the full address or value.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">How accurate is the AI valuation?<span class="faq-toggle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
-        <div class="faq-a">The AI provides an estimated value range with a confidence level (high, medium, low) based on real comparable sales. It's a market-context estimate, not a formal appraisal — always pair with a licensed appraiser for legal use.</div>
+        <div class="faq-a">The AI provides an estimated value range with a confidence level (high, medium, low) based on real comparable sales found via live web search at the time of analysis. It's a market-context estimate, not a formal appraisal — always pair with a licensed appraiser for legal use.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How does the condition rating work?<span class="faq-toggle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
+        <div class="faq-a">A vision pass on every photo gives the property one of six tiers — excellent, very good, good, average, poor, or very poor — each with a corresponding adjustment percentage applied to the AI's raw market estimate. The reasoning behind the rating is printed on the valuation page.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Do I need to download an app?<span class="faq-toggle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
@@ -491,8 +501,8 @@ footer{border-top:1px solid var(--border);padding:48px 40px;}
         <div class="faq-a">PropID is currently in early access. Pricing varies depending on your broker, lender, or insurer arrangement. Contact the party who sent you the invite for specifics.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">Is PropID available outside Ontario?<span class="faq-toggle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
-        <div class="faq-a">Currently, PropID is focused on Ontario. We're planning to expand to other Canadian provinces in 2026. Sign up for early access to be notified when we launch in your area.</div>
+        <div class="faq-q">Where is PropID available?<span class="faq-toggle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
+        <div class="faq-a">PropID is rolling out across Canadian markets. Sign up for early access and we'll let you know when we launch in your area.</div>
       </div>
     </div>
   </div>
@@ -503,15 +513,15 @@ footer{border-top:1px solid var(--border);padding:48px 40px;}
   <div class="cta-glow"></div>
   <div class="section-tag">Early access</div>
   <h2>Ready to get started?</h2>
-  <p class="section-sub">PropID is currently invite-only. Brokers and homeowners in Ontario can request early access below.</p>
+  <p class="section-sub">PropID is currently invite-only. Request access below and we'll be in touch within 48 hours.</p>
   <div class="cta-actions">
-    <a href="https://app.propid.ca/request-invite.html" class="btn-primary">Request Early Access →</a>
-    <a href="/PropID-Homeowner-Guide.pdf" target="_blank" class="btn-secondary">
+    <a href="https://app.propid.ca/request-invite" class="btn-primary">Request early access →</a>
+    <a href="https://app.propid.ca/guide.html" class="btn-secondary">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-      Homeowner Guide
+      Homeowner guide
     </a>
   </div>
-  <p class="cta-note">Ontario only · No spam · Invite sent within 48 hours</p>
+  <p class="cta-note">Invite sent within 48 hours</p>
 </div>
 
 <!-- FOOTER -->
@@ -522,21 +532,23 @@ footer{border-top:1px solid var(--border);padding:48px 40px;}
         <div class="nav-icon" style="width:28px;height:28px;border-radius:7px;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
             <path d="M12 3L2 9.5V21H9V15H15V21H22V9.5L12 3Z" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" stroke-linejoin="round"/>
-            <circle cx="18" cy="7" r="4" fill="rgba(0,10,50,0.7)"/>
-            <circle cx="18" cy="7" r="1.6" fill="#fff"/>
-            <path d="M18 11L18 15" stroke="rgba(255,255,255,0.5)" stroke-width="1.2" stroke-linecap="round"/>
+            <circle cx="18" cy="7" r="4.2" fill="rgba(0,10,50,0.7)"/>
+            <circle cx="18" cy="7" r="1.7" fill="#fff"/>
+            <path d="M18 11.2L18 15.5" stroke="rgba(255,255,255,0.55)" stroke-width="1.3" stroke-linecap="round"/>
           </svg>
         </div>
         <span style="font-family:var(--display);font-size:15px;font-weight:700;letter-spacing:-0.03em;"><span class="prop" style="color:var(--text);">Prop</span><span style="color:var(--blue-light);">ID</span></span>
       </div>
-      <span class="footer-copy">© 2026 PropID. Ontario, Canada.</span>
+      <span class="footer-copy">© 2026 PropID</span>
     </div>
     <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
       <div class="footer-links">
+        <a href="https://app.propid.ca/verify">Verify</a>
+        <a href="https://app.propid.ca/guide.html">Guide</a>
+        <a href="https://app.propid.ca/request-invite">Request access</a>
         <a href="https://app.propid.ca/privacy.html">Privacy</a>
         <a href="https://app.propid.ca/terms.html">Terms</a>
-        <a href="mailto:info@propid.ca">Contact</a>
-        <a href="/PropID-Homeowner-Guide.pdf" target="_blank">Guide</a>
+        <a href="https://app.propid.ca/contact.html">Contact</a>
       </div>
       <div class="footer-badge">Your Home. Verified.</div>
     </div>
@@ -544,48 +556,46 @@ footer{border-top:1px solid var(--border);padding:48px 40px;}
 </footer>
 
 <script>
-// THEME TOGGLE — saves preference, updates icon
+// THEME TOGGLE
 (function() {
-  const root = document.documentElement;
-  const saved = localStorage.getItem('propid_theme');
+  var root = document.documentElement;
+  var saved = localStorage.getItem('propid_theme');
   if (saved) root.setAttribute('data-theme', saved);
-
-  const sun = document.getElementById('icon-sun');
-  const moon = document.getElementById('icon-moon');
-
+  var sun = document.getElementById('icon-sun');
+  var moon = document.getElementById('icon-moon');
   function syncIcons() {
-    const t = root.getAttribute('data-theme');
+    var t = root.getAttribute('data-theme');
     if (t === 'light') { sun.style.display = 'none'; moon.style.display = ''; }
     else { sun.style.display = ''; moon.style.display = 'none'; }
   }
   syncIcons();
-
-  document.getElementById('theme-toggle').addEventListener('click', () => {
-    const cur = root.getAttribute('data-theme') || 'dark';
-    const next = cur === 'dark' ? 'light' : 'dark';
+  document.getElementById('theme-toggle').addEventListener('click', function() {
+    var cur = root.getAttribute('data-theme') || 'dark';
+    var next = cur === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
-    localStorage.setItem('propid_theme', next);
+    try { localStorage.setItem('propid_theme', next); } catch(e){}
     syncIcons();
   });
 })();
 
 // NAV SCROLL EFFECT
-window.addEventListener('scroll', () => {
+window.addEventListener('scroll', function() {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
 });
 
 // FADE-IN ON SCROLL
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+var obs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
-document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+document.querySelectorAll('.fade-in').forEach(function(el) { obs.observe(el); });
 
 // FAQ ACCORDION
-document.querySelectorAll('.faq-item').forEach(item => {
-  item.querySelector('.faq-q').addEventListener('click', () => {
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  item.querySelector('.faq-q').addEventListener('click', function() {
     item.classList.toggle('open');
   });
 });
 </script>
+
 </body>
 </html>
